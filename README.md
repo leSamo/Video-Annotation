@@ -26,7 +26,7 @@
 7. [Program documentation](#program-documentation)  
     a. [Package dependencies](#package-dependencies)  
     b. [Client-side libraries](#client-side-libraries)  
-    c. [File structure](#file-structure)
+    c. [File structure](#file-structure)  
     d. [API enpoints](#api-endpoints)  
     e. [Client-server communication](#client-server-communication)  
 8. [Used libraries](#used-libraries)  
