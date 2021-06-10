@@ -1,0 +1,77 @@
+{
+    "name": "yoga",
+    "description": "Sun salutation yoga poses",
+    "items": [{
+            "name": "Equal Standing"
+        },
+        {
+            "name": "Mountain with Bend Forward"
+        },
+        {
+            "name": "Upward Hand"
+        },
+        {
+            "name": "Standing Forward Fold"
+        },
+        {
+            "name": "Standing Forward Flat"
+        },
+        {
+            "name": "Warrior I with Palms at Heart"
+        },
+        {
+            "name": "Warrior I"
+        },
+        {
+            "name": "High Plank"
+        },
+        {
+            "name": "Four-Limbed Staff"
+        },
+        {
+            "name": "Downward Facing Dog"
+        },
+        {
+            "name": "Low Cobra"
+        },
+        {
+            "name": "Upward Facing Dog"
+        },
+        {
+            "name": "Thunderbolt"
+        },
+        {
+            "name": "Thunderbolt with Bend Forward"
+        },
+        {
+            "name": "Thunderbolt with Upper Hand"
+        },
+        {
+            "name": "Child"
+        },
+        {
+            "name": "Cat Bent"
+        },
+        {
+            "name": "Reverse Cat"
+        },
+        {
+            "name": "Cat Stretching"
+        },
+        {
+            "name": "Warrior III"
+        },
+        {
+            "name": "Warrior III with Hands Forward"
+        },
+        {
+            "name": "Warrior III with Hands to the Side"
+        },
+        {
+            "name": "Triangle"
+        },
+        {
+            "name": "Revolved Triangle"
+        }
+    ]
+}

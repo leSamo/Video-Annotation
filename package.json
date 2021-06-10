@@ -1,0 +1,20 @@
+{
+    "name": "video-annotation",
+    "version": "0.1.0",
+    "engines": {
+        "node": "14.16.0"
+    },
+    "private": true,
+    "description": "Video annotation app",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon ./app.js -e js,html,css,ejs"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "ejs": "^3.1.6",
+        "express": "~4.16.1",
+        "googleapis": "^39.2.0",
+        "nodemon": "^2.0.7"
+    }
+}

@@ -1,0 +1,476 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #383838;
+    overflow: hidden;
+    background-color: #e9e9e9;
+    margin: 0;
+}
+
+
+/* Working area (center of the page)  */
+
+#container {
+    position: absolute;
+    left: 200px;
+    right: 200px;
+    top: 60px;
+    width: calc(100% - 400px);
+    height: calc(100% - 250px);
+    background-color: black;
+    table-layout:fixed;
+}
+
+#container td {
+    width: 300px;
+}
+
+#container-info {
+    text-align: center;
+    margin: auto 0;
+    padding: 250px 0;
+    z-index: 50;
+    height: 100%;
+    background-color: black;
+    color: white;
+}
+
+#controls {
+    position: absolute;
+    bottom: 190px;
+    width: 300px;
+    height: 50px;
+    left: calc(50% - 125px);
+}
+
+#controls button {
+    margin: 0px;
+    padding: 0px;
+}
+
+#controls img {
+    width: 50px;
+    height: 50px;
+}
+
+#timeline {
+    width: calc(100% - 410px);
+    background-color: #333;
+    position: absolute;
+    bottom: 0;
+    left: 200px;
+    right: 210px;
+    height: 190px;
+}
+
+#timeline:hover {
+    cursor: pointer;
+}
+
+#scrubber {
+    position: absolute;
+    background-color: white;
+    width: 3px;
+    top: 0;
+    height: 100%;
+    pointer-events: none;
+}
+
+.scale-mark {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 3px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Top panel with new folder, import labels, help and submit buttons and image name text */
+
+#top-wrapper {
+    z-index: 10;
+    position: fixed;
+    height: 60px;
+    width: 100%;
+    background-color: #C8C8C8;
+    text-align: center;
+}
+
+.top-wrapper-btn {
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20;
+    color: #383838;
+    cursor: pointer;
+    user-select: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    float: left;
+    min-width: 100px;
+}
+
+#submit-btn {
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: rgb(168, 248, 168);
+    border: #383838 solid 1px;
+    border-radius: 2px;
+    font-size: 20;
+    cursor: pointer;
+    user-select: none;
+    float: right;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-width: 100px;
+}
+
+#submit-btn:hover {
+    background-color: rgb(150, 248, 150);
+}
+
+#title-text {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-top: 13px;
+    font-size: 24;
+    font-weight: 600;
+    z-index: -10;
+}
+
+
+/* Error message shown in the middle of the working area when image cannot be loaded */
+
+#error-msg {
+    display: none;
+    margin: auto;
+    position: absolute;
+    top: 350px;
+    left: 0;
+    right: 0;
+    width: 400px;
+    padding: 5px;
+    background-color: indianred;
+    text-align: center;
+    font-size: 20;
+}
+
+
+/* Status text with misc info shown in the left bottom corner of the working area */
+
+#status {
+    position: absolute;
+    bottom: 0;
+    left: 200px;
+    padding: 3px;
+    background-color: orange;
+    z-index: 150;
+}
+
+#status:empty {
+    display: none;
+}
+
+
+/* Left side panel with labels to choose from */
+
+#toolbar {
+    background-color: #C8C8C8;
+    display: grid;
+    grid-template-columns: 1fr;
+    height: calc(100% - 320px);
+    width: 200px;
+    bottom: 300px;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    z-index: 10;
+    border-collapse: collapse;
+    overflow-y: auto;
+    overflow-x: hidden; 
+}
+
+.toolbar-item {
+    display: block;
+    border: 1px solid #383838;
+    cursor: pointer;
+    user-select: none;
+    background-color: whitesmoke;
+    width: 100%;
+}
+
+.video-js {
+    height: calc(100% - 25px);
+    width: 100%;
+}
+
+.delay-slider {
+    width: 100%;
+    height: 25px;
+    background-color: lightgray;
+}
+
+.delay-slider input[type="range"] {
+    vertical-align: middle;
+    width: calc(100% - 60px);
+}
+
+.delay-slider input[type="number"] {
+    width: 50px;
+}
+
+select {
+    display: none;
+    width: 180px;
+    height: 30px;
+    margin-bottom: 5px;
+    font-size: 14;
+    font-weight: 600;
+}
+
+select > option {
+    font-size: 14;
+}
+
+.toolbar-text {
+    height: 100%;
+    width: 130px;
+    margin: auto;
+    color: black;
+    font-size: 14;
+}
+
+.toolbar-img {
+    width: 28px;
+    height: 28px;
+    border: solid 1px black;
+}
+
+.toolbar-delete-btn {
+    background-color: coral;
+    border: #383838 solid 1px;
+    border-radius: 2px;
+    padding: 2px;
+}
+
+.toolbar-delete-img {
+    width: 26px;
+    height: 26px;
+}
+
+
+/* Bottom-left actions toolbar */
+
+#actions {
+    background-color: #919191;
+    border-top: gray 20px solid;
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 258px;
+    width: 200px;
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    z-index: 10;
+    border-collapse: collapse;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#speed-slider {
+    width: 100px;
+}
+
+#speed-label {
+    font-size: 22px;
+}
+
+
+/* Toolbar with undo, redo, toggle annotations and toggle miniatures button */
+
+#top-toolbar {
+    position: fixed;
+    margin: 0 auto;
+    padding: 0;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    width: 238px;
+    top: 60px;
+}
+
+#top-toolbar button {
+    margin: 0px;
+    padding: 0px;
+}
+
+#top-toolbar img {
+    width: 50px;
+    height: 50px;
+}
+
+
+/* Right side history panel */
+
+#history {
+    background-color: #919191;
+    display: grid;
+    grid-template-columns: 1fr;
+    height: calc(100% - 60px);
+    width: 210px;
+    position: fixed;
+    top: 60px;
+    right: 0;
+    z-index: 10;
+    border-collapse: collapse;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.toolbar-subtext {
+    font-size: 12;
+    color: gray;
+}
+
+
+/* Select file from folder modal */
+
+#folder-modal {
+    width: 700px;
+    height: 500px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    background-color: #C8C8C8;
+    z-index: 30;
+    padding: 1em;
+    border: solid 2px black;
+    display: none;
+}
+
+#folder-modal-title {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+#folder-modal>input {
+    height: 30px;
+    width: 350px;
+}
+
+#folder-modal-status {
+    min-height: 20px;
+    color: rgb(210, 0, 0);
+    text-align: right;
+}
+
+.folder-modal-table {
+    display: block;
+    grid-template-columns: 1fr;
+    height: 355px;
+    max-height: 380px;
+    width: 95%;
+    border: solid 2px black;
+    margin-top: 10px;
+    background-color: #919191;
+    overflow-y: auto;
+}
+
+#folder-modal-text {
+    text-align: center;
+    vertical-align: middle;
+    padding: 120px 100px 0 100px;
+    width:500px;
+    height: 240px;
+}
+
+#modal-ok {
+    margin-top: 10px;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: rgb(168, 248, 168);
+    border: #383838 solid 1px;
+    border-radius: 2px;
+    font-size: 20;
+    cursor: pointer;
+    user-select: none;
+    float: right;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100px;
+}
+
+#modal-back {
+    margin-top: 10px;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: rgb(248, 168, 168);
+    border: #383838 solid 1px;
+    border-radius: 2px;
+    font-size: 20;
+    cursor: pointer;
+    user-select: none;
+    float: left;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100px;
+}
+
+.file-row {
+    border: solid 1px black;
+    background-color: whitesmoke;
+    padding: 3px;
+    height: 20px;
+    user-select: none;
+}
+
+label {
+    cursor: pointer;
+}
+
+#main {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 25;
+}
+
+.blur {
+    pointer-events: none;
+    filter: blur(5px);
+}
+
+.hover-item:hover {
+    background-color: #e0e0e0;
+}
+
+/* Loading spinner */
+.spinner {
+    display: none;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-bottom: 16px solid gray;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: calc(50% - 60px);
+    left: calc(50% - 60px);
+    padding: 3px;
+    z-index: 150;
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

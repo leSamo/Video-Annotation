@@ -1,0 +1,241 @@
+<html>
+
+<head>
+    <title>Video annotation</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="img/favicon.png"/>
+</head>
+
+<body>
+    <div id="main">
+        <!-- Top panel with select file, import labels, help and submit buttons and image name text -->
+        <div id="top-wrapper">
+            <button class="top-wrapper-btn" onclick="openModal()" title="Input new Google Drive folder ID">
+            Import video
+        </button>
+            <input id='fileid' type='file' accept=".json" hidden onchange="this.files[0].text().then(json => setupLabels(json))" />
+            <button class="top-wrapper-btn" id="upload-labels" title="Import .json file with labels definined">
+            Import labels
+        </button>
+            <button class="top-wrapper-btn" title="Open new tab with help" onclick="window.open('https://gist.github.com/leSamo/b3aeb98aa9b42b67741a4587dc226139','_blank')">
+            Help
+        </button>
+
+            <p id="title-text"></p>
+
+            <button id="submit-btn" onclick="submitAnnotations()" title="Create a .json file with all annotations and upload it to Google Drive (ENTER)">
+            Save
+        </button>
+        </div>
+
+        <!-- Left side panel with labels to choose from -->
+        <table id="toolbar">
+            <tr id="toolbar-placeholder" style="padding-top: 300px; height: 80vh;">
+                <td style="text-align: center; vertical-align: middle;">
+                    You currently don't have any labels imported, use "Import labels" button
+                </td>
+            </tr>
+            <tr class="toolbar-item hover-item" id="toolbar-item-template" style="display: none;">
+                <td>
+                    <div class="toolbar-img">
+                </td>
+                <td>
+                    <div class="toolbar-text">Template</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="category" onchange="selectCategory(this)">
+
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Bottom-left actions panel -->
+        <table id="actions">
+            <tr class="toolbar-item">
+                <td>
+                    <img class="toolbar-img" src="img/speed.png">
+                </td>
+                <td>
+                    <input type="range" min="0" max="4" value="4" id="speed-slider">
+                    <span id="speed-label">1.0x</span>
+                </td>
+            </tr>
+            <tr class="toolbar-item hover-item" onclick="addKeyframe('before')">
+                <td>
+                    <img class="toolbar-img" src="img/before.png">
+                </td>
+                <td>
+                    <div class="toolbar-text">Before (1)</div>
+                </td>
+            </tr>
+            <tr class="toolbar-item hover-item" onclick="addKeyframe('start')">
+                <td>
+                    <img class="toolbar-img" src="img/start.png">
+                </td>
+                <td>
+                    <div class="toolbar-text">Start (2)</div>
+                </td>
+            </tr>
+            <tr class="toolbar-item hover-item" onclick="addKeyframe('best')">
+                <td>
+                    <img class="toolbar-img" src="img/best.png">
+                </td>
+                <td>
+                    <div class="toolbar-text">Best (3)</div>
+                </td>
+            </tr>
+            <tr class="toolbar-item hover-item" onclick="addKeyframe('end')">
+                <td>
+                    <img class="toolbar-img" src="img/end.png">
+                </td>
+                <td>
+                    <div class="toolbar-text">End (4)</div>
+                </td>
+            </tr>
+            <tr class="toolbar-item hover-item" onclick="addKeyframe('after')">
+                <td>
+                    <img class="toolbar-img" src="img/after.png">
+                </td>
+                <td>
+                    <div class="toolbar-text">After (5)</div>
+                </td>
+            </tr>
+            <tr class="toolbar-item">
+                <td>
+                    <img class="toolbar-img">
+                </td>
+                <td id="status-text">
+
+                </td>
+            </tr>
+        </table>
+
+
+        <!-- Right side history panel -->
+        <table id="history">
+            <tr class="toolbar-item" id="history-item-template" style="display: none;">
+                <td>
+                    <img class="toolbar-img">
+                </td>
+                <td>
+                    <div class="toolbar-text">Template</div>
+                    <div class="toolbar-subtext">Template</div>
+                </td>
+                <td>
+                    <button class="toolbar-delete-btn">
+                        <img src="img/trash.png" class="toolbar-delete-img">
+                    </button>
+                </td>
+            </tr>
+        </table>
+
+        <table id="container">
+            <tr id="container-info">
+                <td>
+                    <b>You currently don't have a video imported.</b><br><br>
+                    1. Import labels in JSON format<br>
+                    2. Copy folder ID from Google Drive and import a video<br>
+                    3. When done with annotating click save to upload JSON file with annotations back to the same
+                    Google Drive folder
+                </td>
+            </tr>
+            <% for (var i = 0; i < 2;  i++) { %>
+            <tr class="video-row" style="display: none;">
+                <% for (var j = 0; j < 3;  j++) { %>
+                <td>
+                    <div class="delay-slider">
+                        <input type="range" min="0" max="300" step="1" value="0" name="<%= 3 * i + j %>">
+                        <input type="number" min="0" step="1" value="0" name="<%= 3 * i + j %>">
+                    </div>
+                    <video id="my-video<%= 3 * i + j %>" class="video-js vjs-big-play-centered" controls preload="auto" data-setup="{}">
+
+                        <p class="vjs-no-js">
+                            To view this video please enable JavaScript, and consider upgrading to a
+                            web browser that
+                            <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                        </p>
+                    </video>
+                </td>
+                <% } %>
+            </tr>
+            <% } %>
+        </table>
+
+        <div id="controls">
+            <button title="Seek 1 second backward" onclick="jumpAll(-1);">
+                <img src="img/seek2.png" style="transform: scale(-1, 1);">
+            </button>
+            <button title="Seek 1 frame backward" onclick="jumpAll(-1 / FPS);">
+                <img src="img/seek1.png" style="transform: scale(-1, 1);">
+            </button>
+            <button title="Toggle play/pause" onclick="togglePauseAll()">
+                <img src="img/play.png" id="play-img">
+                <img src="img/pause.png"id="pause-img" style="display: none;">
+            </button>
+            <button title="Seek 1 frame forward" onclick="jumpAll(1 / FPS);">
+                <img src="img/seek1.png">
+            </button>
+            <button title="Seek 1 second forward" onclick="jumpAll(1);">
+                <img src="img/seek2.png">
+            </button>
+        </div>
+        <div id="timeline">
+            <svg height="100%" width="100%">
+                
+            </svg>
+            <div id="scrubber"></div>
+        </div>
+
+    </div>
+
+    <div class="spinner"></div>
+
+    <!-- Modal from which videos are selected -->
+    <div id="folder-modal">
+        <span id="folder-modal-title">Select files to annotate</span><br>
+        Input folder id: <input type="text" id="folder-id-input"><br>
+
+        <div id="folder-modal-text">
+            Input a valid folder ID to show available files. Folder ID can be obtained by copying last part
+            of the URL when you are inside folder on Google Drive. If the folder ID is not working make sure
+            you have shared that folder with annotation.tester@gmail.com account.
+        </div>
+
+        <div id="folder-modal-grid" style="display: none; grid-template-columns: 1fr 1fr; justify-items: center;">
+            <div class="folder-modal-table" id="video-table">
+                <div class="file-row template" style="display: none;"></div>
+            </div>
+
+            <div class="folder-modal-table" id="json-table">
+                <div class="file-row template" style="display: none;"></div>
+                <div class="file-row" id="none">
+                    <label><input type="radio" name="json" index="-1" checked><b>Create a new JSON file</b></label>
+                </div>
+            </div>
+        </div>
+
+        <div id="folder-modal-status"></div>
+        <button id="modal-back" onclick="closeModal(REMOVE_BLUR_BACKDROP)">Back</button>
+        <button id="modal-ok" onclick="confirmModal()">OK</button>
+    </div>
+
+    <!-- Data from app.js -->
+    <script>
+        const defaultDataJSON = <%- defaultData %>;
+    </script>
+
+    <!-- Video playing library -->
+    <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
+
+    <script src="index.js"></script>
+    <script src="timeline.js"></script>
+    <script src="videoHandler.js"></script>
+    <script src="folderModal.js"></script>
+</body>
+
+</html>
