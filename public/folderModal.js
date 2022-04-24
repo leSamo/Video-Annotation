@@ -31,6 +31,7 @@ function getDownloadStatus(filenames) {
 function confirmModal() {
     const selectedVideos = getSelectedVideos();
     const selectedJson = getSelectedJson();
+    const selectedFPS = parseInt($("#fps-input").val());
     
     if (selectedVideos.length === 0) {
         if (folderFiles) {
@@ -45,6 +46,13 @@ function confirmModal() {
         alert("Please select at most 6 videos.");
         return;
     }
+
+    if (isNaN(selectedFPS) || selectedFPS < 1 || selectedFPS > 1000) {
+        alert("Set FPS to a number between 1 and 1000.")
+        return;
+    }
+
+    FPS = selectedFPS;
 
     videoIds = JSON.stringify(selectedVideos.map(video => video.id));
     videoNames = JSON.stringify(selectedVideos.map(video => video.name));
@@ -199,10 +207,6 @@ function folderDataToTable(folderData) {
 function clearFolderTable() {
     $(".file-row:visible").not("#none").remove();
 }
-
-/*
-$("#folder-modal-status").html("JSON file will be loaded and then overwritten upon saving!");
-*/
 
 function getSelectedVideos() {
     const files = $("#folder-modal input[type=checkbox]:checked").map(function() {

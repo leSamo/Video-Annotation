@@ -197,8 +197,9 @@
 
     <!-- Modal from which videos are selected -->
     <div id="folder-modal">
-        <span id="folder-modal-title">Select files to annotate</span><br>
-        Input folder id: <input type="text" id="folder-id-input"><br>
+        <div id="folder-modal-title">Select files to annotate</div>
+        Input folder id: <input type="text" id="folder-id-input">
+        FPS: <input type="number" id="fps-input" min="1" max="1000" value="30">
 
         <div id="folder-modal-text">
             Input a valid folder ID to show available files. Folder ID can be obtained by copying last part

@@ -1,4 +1,4 @@
-const FPS = 30;
+let FPS = 30;
 const PLAYBACK_SPEEDS = ["0.2", "0.4", "0.6", "0.8", "1.0"];
 
 let allPlayers;
