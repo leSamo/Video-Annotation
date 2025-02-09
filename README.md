@@ -1,6 +1,6 @@
 # Video Annotation
 
-## App is available online at http://video-anno.herokuapp.com/.
+![Example screenshot](https://github.com/user-attachments/assets/67aae340-b5a6-4b90-bf64-781b1d1a6ade)
 
 # Table of contents
 1.	[Description](#description)  
@@ -32,7 +32,7 @@
 8. [Used libraries](#used-libraries)  
 
 # Description
-Video annotation tool for machine learning, capable of importing videos and exporting annotations in JSON format to Google Drive. App is built in Node.js on Express framework. It uses Google API to communicate with Google Drive. App is available online at http://video-anno.herokuapp.com/. In case you want to set up the app locally, follow instructions in [local setup chapter](#local-setup) below.
+Video annotation tool for machine learning, capable of importing videos and exporting annotations in JSON format to Google Drive. App is built in Node.js on Express framework. It uses Google API to communicate with Google Drive. In case you want to set up the app locally, follow instructions in [local setup chapter](#local-setup) below.
 
 ## Browser compatibility
 - Chrome (tested on version 87)
@@ -45,7 +45,7 @@ Your browser must also support format of the video you are annotating, see [HTML
 Before using the app, you need to set up a Google Drive folder with the videos to annotate.
 1. Create a new folder inside your own [Google Drive](https://drive.google.com/)
 2. Put all dataset videos in the folder (supported video extensions are `mp4, mov, mkv, wmv, flv, avi, webm, mpg, ogv, 3gp`, but your browser must also support extension and codec of your choice, for example Firefox doesn't support `.mkv`, but Chrome does)
-3. Share the folder with e-mail address of the account whose credentials the server is using (in case you haven’t set up the app locally, and you are using the online Heroku version, the e-mail is `annotation.tester@gmail.com`) and make sure you select `Editor` permissions (necessary for uploading resulting annotation JSON data back to that folder), in case you set up the app locally and you are using the same account for server API and client (where you put the video data), skip this step
+3. Share the folder with email address of the account whose credentials the server is using and make sure you select `Editor` permissions (necessary for uploading resulting annotation JSON data back to that folder), in case you set up the app locally and you are using the same account for server API and client (where you put the video data), skip this step
 
 ## Usage
 1. Use `import labels`  button and select .json file with labels definition, example labels file is shown in [labels format chapter](#labels-json-format)
@@ -187,9 +187,9 @@ Output file in JSON format is uploaded to the same folder in Google Drive. Annot
 ```
 
 # Link generator
-![Link generator screenshot](https://i.imgur.com/EQgEZVw.png)
+![Link generator screenshot](https://github.com/user-attachments/assets/99141f46-dd4d-474b-985a-6bb5b70dc3a0)
 
-At http://video-anno.herokuapp.com/generator there is a generator for guest links. These links redirect to the application with some additional functionality:
+Running the app exposes `/generator` which enables the generation of guest links. These links redirect to the application with some additional functionality:
 - prefilled folder ID, so the guest doesn't have to provide one
 - prefilled labels JSON, so the guest doesn't have to provide one
 - lock for folder ID, so the guest can't change the folder ID
@@ -262,7 +262,7 @@ Video-Annotation
 
 
 ## Client-server communication
-Due to the Heroku limitations on maximum HTTP response time being only 30 seconds, videos can't be requested and downloaded in a single HTTP request. Upon user entering folderID client requests list of the folder contents, server will pass this request onto Drive API. Selecting input videos and confirming will request `/video` endpoint. Server will start downloading the videos into `public/temp` folder with `.dl` temporary extentension to indicate download in progress. Once downloading of each file is done, the file is renamed to remove the `.dl` extension. During this time client will poll `/videoStatus` endpoint every 2 seconds to see if the download is done. If yes, client will request `/videoFile` for each video and will receive stream of video data.
+Due to the common limitations of servers on maximum HTTP response time being only 30 seconds, videos can't be requested and downloaded in a single HTTP request. Upon user entering folderID client requests list of the folder contents, server will pass this request onto Drive API. Selecting input videos and confirming will request `/video` endpoint. Server will start downloading the videos into `public/temp` folder with `.dl` temporary extentension to indicate download in progress. Once downloading of each file is done, the file is renamed to remove the `.dl` extension. During this time client will poll `/videoStatus` endpoint every 2 seconds to see if the download is done. If yes, client will request `/videoFile` for each video and will receive stream of video data.
 
 Submitting data will simply user `/submit` endpoint which simply uploads output data as a JSON file with the same basename as video file into Google Drive folder. If there were multiple videos being annotated side by side then JSON file will be created for every one of them.
 
