@@ -1,6 +1,6 @@
 # Video Annotation
 
-![Example screenshot](https://github.com/user-attachments/assets/67aae340-b5a6-4b90-bf64-781b1d1a6ade)
+![Example screenshot of the application](https://github.com/user-attachments/assets/67aae340-b5a6-4b90-bf64-781b1d1a6ade)
 
 # Table of contents
 1.	[Description](#description)  
@@ -70,7 +70,7 @@ Clicking an item in the left label panel will create a new annotation, which wil
 You can choose one of the formats, functionally same, but they do have different appearance in the labels panel.
 
 ## Simple list of labels
-```
+```json
 {
     "name": "yoga",                                 // optional
     "description": "Sun salutation yoga poses",     // optional
@@ -89,7 +89,7 @@ You can choose one of the formats, functionally same, but they do have different
 ```
 
 ## Labels split into categories
-```
+```json
 {
     "name": "yoga",                                 // optional
     "description": "Sun salutation yoga poses",     // optional
@@ -154,7 +154,7 @@ You can choose one of the formats, functionally same, but they do have different
 Output file in JSON format is uploaded to the same folder in Google Drive. Annotating multiple videos will create correctly synced JSON file for each video. You can modify output file by selecting it when importing a video. This will display all existing annotations and will allow you to delete and add new annotations.
 
 ## Example
-```
+```json
 {
     "total-frames": 2726,
     "annotations": [
@@ -209,15 +209,15 @@ Running the app exposes `/generator` which enables the generation of guest links
 
 # Program documentation
 ## Package dependencies
-- [Express](https://expressjs.com/) - Fast, unopinionated, minimalist web framework for Node.js
-- [Body parser](http://expressjs.com/en/resources/middleware/body-parser.html) - Parse incoming request bodies in a middleware
-- [Google APIs](https://www.npmjs.com/package/googleapis#google-apis) - Node.js client library for using Google APIs
-- [Nodemon](https://nodemon.io/) - Utility that will monitor for any changes in your source and automatically restart your server
-- [EJS](https://ejs.co/) - Embedded JavaScript templating
+- [Express](https://expressjs.com/) -- Backend web framework for Node.js
+- [Body parser](http://expressjs.com/en/resources/middleware/body-parser.html) -- Parse incoming request bodies in a middleware
+- [Google APIs](https://www.npmjs.com/package/googleapis#google-apis) -- Node.js client library for using Google APIs
+- [Nodemon](https://nodemon.io/) -- Utility for automatic restarting of development server
+- [EJS](https://ejs.co/) -- Embedded JavaScript templating
 
 ## Client-side libraries
-- [video.js](https://videojs.com/) - HTML5 player framework
-- [jQuery](https://jquery.com/)
+- [video.js](https://videojs.com/) -- HTML5 player framework
+- [jQuery](https://jquery.com/) -- DOM manipulation library
 
 ## File structure
 ```
